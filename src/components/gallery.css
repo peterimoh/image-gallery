@@ -1,0 +1,38 @@
+.gallery,
+.btn__section,
+.gallery__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.gallery__img {
+    height: 300px;
+    padding: 10px;
+}
+
+.gallery__btn{
+    width: 100%;
+    padding: 15px;
+    border-width: 0px;
+    background-color: yellow;
+}
+
+
+@media screen and (max-width:768px){
+    .gallery {
+        width: 500px;
+    }
+    .gallery__img {
+        height: 200px;
+    }
+}
+@media screen and (max-width:480px){
+    .gallery {
+        width: 300px;
+    }
+    .gallery__img {
+        height: 250px;
+    }
+}

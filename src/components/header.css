@@ -1,0 +1,13 @@
+.header{
+    background-color: rgb(248, 248, 18);
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    object-fit: contain;
+}
+
+.logo{
+    font-size: 25px;
+margin-left: 10px;
+font-family: 'Franklin Gothic Medium', sans-serif;
+}
