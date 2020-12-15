@@ -1,39 +1,41 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import "./gallery.css";
 
-const Gallery = () => {
-  // create a state for the API call
-  const [data, setData] = useState([]);
-  // const [img, setImg] = useState("");
-  data.length = 6;
+function Gallery() {
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [items, setItems] = useState([]);
 
-  // fetch and Mount the API
-  useEffect(async () => {
-    const result = await axios("https://jsonplaceholder.typicode.com/photos");
-    setData(result.data);
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/albums/1/photos")
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          setIsLoaded(true);
+          setItems(result);
+        },
+
+        (error) => {
+          setIsLoaded(true);
+          setError(error);
+        }
+      );
   }, []);
 
-  // function that will load more images when the button is clicked
-  const handleClick = () => {};
-
-  return (
-    <>
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  } else if (!isLoaded) {
+    return <div>Loading...</div>;
+  } else {
+    return (
       <div className="gallery">
-        {/* mapping through the data in the API to render in the Img */}
-        {data.map((item) => (
+        {items.map((item) => (
           <img className="gallery__img" src={item.url} alt="" key={item.id} />
         ))}
+        {/* <img src={items.url} alt="" /> */}
       </div>
-      <div className="btn__section">
-        <center>
-          <button onClick={handleClick} className="gallery__btn">
-            Load more
-          </button>
-        </center>
-      </div>
-    </>
-  );
-};
+    );
+  }
+}
 
 export default Gallery;
